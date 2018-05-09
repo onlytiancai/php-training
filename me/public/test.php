@@ -8,14 +8,23 @@
 
 <h1>PHP 快速上手</h1>
     
-<h2>输出一个字符串或数字</h2>
+<h2>输出信息</h2>
         
 <pre>
-echo 'Hello PHP !';
+// 打印字符串
+echo 'Hello PHP !'; 
+
+// 打印数字
 echo 2018;
 
+// 混合打印
+echo 'Hello ' . 2018 . ' !';
+
+// 输出复杂类型
 var_dump(2018);
-printf('hello %s', 2018);
+
+// 格式化输出
+printf('hello %s ！', 2018);
 </pre>
 
 <?php
@@ -447,6 +456,83 @@ echo strpos('aaa111bbb', 'bbb') === strlen('aaa111bbb') - strlen('bbb') ? 'true'
     <li>按大写字母分割字符串</li>
 </ul>
 
+<h2>字典：关联数组</h2>
+
+<?php
+$d = ['a' => 1, 'b' => 2];
+//根据键获取值
+echo $d['a'];
+echo '<br>';
+
+//添加键值对
+$d['c'] = 3;
+print_r($d);
+echo '<br>';
+
+
+//删除指定键
+unset($d['b']);
+print_r($d);
+echo '<br>';
+
+//某键是否存在
+var_dump(isset($d['a']), isset($d['b']));
+echo '<br>';
+
+//遍历字典
+foreach ($d as $k => $v) {
+    echo "$k => $v";
+    echo '<br>';
+}
+
+?>
+
+<h2>时间操作：</h2>
+<pre>
+// 设置时区
+date_default_timezone_set("PRC");
+
+// 获取当前时间的时间戳。
+echo time();
+
+// 获取当前时间格式化字符串
+echo date("Y-m-d H:i:s");
+</pre>
+<?php
+// 设置时区
+date_default_timezone_set("PRC");
+
+// 获取当前时间的时间戳。
+echo time();
+echo '<br>';
+
+// 获取当前时间格式化字符串
+echo date("Y-m-d H:i:s");
+echo '<br>'
+?>
+
+<h2>文件操作: 打开并逐行读取文件</h2>
+<pre>
+$filename = 'inc.php';
+if(file_exists($filename)){
+    $file = fopen($filename, "r") or exit("Unable to open file!");
+    while(!feof($file)) {
+        echo htmlspecialchars(fgets($file));
+    }
+    fclose($file);
+}
+</pre>
+<?php
+$filename = 'inc.php';
+if(file_exists($filename)){
+    $file = fopen($filename, "r") or exit("Unable to open file!");
+    while(!feof($file)) {
+        echo htmlspecialchars(fgets($file)) . "<br>";
+    }
+    fclose($file);
+}
+?>
+
 
 <h2>类型判断</h2>
 <pre>
@@ -470,6 +556,16 @@ var_dump(is_null(null));
 
 // 是否为 数组
 var_dump(is_array([1, 2, 3]));
+
+// 是否为空
+var_dump(empty(0));
+var_dump(empty(1));
+var_dump(empty(true));
+var_dump(empty(false));
+var_dump(empty(''));
+var_dump(empty('a'));
+var_dump(empty('0'));
+var_dump(empty('1'));
 </pre>
 <?php
 // 是否为数字
@@ -501,6 +597,18 @@ echo '<br>';
 // 是否为 数组
 var_dump(is_array([1, 2, 3]));
 echo '<br>';
+
+// 是否为空
+var_dump(empty(0));
+var_dump(empty(1));
+var_dump(empty(false));
+var_dump(empty(true));
+var_dump(empty(''));
+var_dump(empty('a'));
+var_dump(empty('0'));
+var_dump(empty('1'));
+var_dump(empty([]));
+var_dump(empty([1]));
 ?>
 
 <h2>类型转换</h2>
