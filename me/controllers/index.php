@@ -1,39 +1,64 @@
 <?php
+// 初始化：加载 model 层和框架核心类
+require_once(APP_ROOT . '/models/UserModel.php');
+
+$user = new UserModel();
 $w = new Wawa();
 
-$w->get('index', function($w) {
-    $rows = $w->fetch('SELECT * from users');
-    $w->render('views/index.php', ['rows' => $rows]);   
+$w->get('index', function($w) use($user) {
+    $w->render(
+        'views/index.php', 
+        ['rows' => $user->getAll()]
+    );   
 });
 
 $w->get('new', function($w) {
-    $w->render('views/user_form.php', ['action' => 'new']);
+    $w->render(
+        'views/user_form.php',
+        ['action' => 'new']
+    );
 });
 
-$w->get('modify', function($w) {
-    $rows = $w->fetch('SELECT * from users where id = ?', [$_GET['id']]);
-    $w->render('views/user_form.php', ['action' => 'modify', 'user' => $rows[0]]);
+$w->get('modify', function($w) use($user) {
+    $id = $_GET['id'];
+    
+    $w->render(
+        'views/user_form.php',
+        ['action' => 'modify', 'user' => $user->get($id)]
+    );
 });
 
-$w->post('add', function($w) {   
-    $sql = 'INSERT INTO `users`(`username`, `nickname`, `password`, `created_at`) VALUES (?, ?, ?, ?)';
-    $w->execute($sql, [$_POST['username'], $_POST['nickname'], $_POST['password'], date('Y-m-d H:i:s')]);
+$w->post('add', function($w) use($user) {   
+    $username = $_POST['username'];
+    $nickname = $_POST['nickname'];
+    $password = $_POST['password'];
+    
+    $user->insert($username, $nickname, $password);
     $w->redirect('index');
 });
 
-$w->post('update', function($w) {
-    $sql = 'update users set nickname=?, password=? where id = ?';
-    $w->execute($sql, [$_POST['nickname'], $_POST['password'], $_POST['id']]);
+$w->post('update', function($w) use($user){
+    $id = $_POST['id'];
+    $nickname = $_POST['nickname'];
+    $password = $_POST['password'];
+    
+    $user->update($id, $nickname, $password);
+    
     $w->redirect('index');
 });
 
-$w->get('remove', function($w) {
-    $rows = $w->fetch('SELECT * from users where id = ?', [$_GET['id']]);
-    $w->render('views/user_delete.php', ['user' => $rows[0]]);
+$w->get('remove', function($w) use($user) {
+    $id = $_GET['id'];
+    
+    $w->render(
+        'views/user_delete.php', 
+        ['user' => $user->get($id)]
+    );
 });
 
-$w->post('remove', function($w) { 
-    $w->execute('delete from users where id = ?', [$_POST['id']]);
+$w->post('remove', function($w) use($user){ 
+    $id = $_POST['id'];
+    $user->remove($id);
     $w->redirect('index');
 });
 

@@ -2,22 +2,25 @@
 ini_set('date.timezone','Asia/Shanghai');
 header("Content-type:text/html;charset=utf-8");
 error_reporting(E_ALL & ~E_STRICT & ~E_NOTICE);
+error_reporting(E_ALL);
+
+const APP_ROOT = __DIR__;
 
 class Wawa
 {    
     private static $_getHandlers = [];
     private static $_postHandlers = [];    
-    private static $config = null;
-    private static $sitePrefix = null;
+    private static $_config = null;
+    private static $_sitePrefix = null;
     private static $controllerName = null;
     private static $actionName = null;   
         
     
     public function __construct() {
         // 使用 $this 无法访问静态属性，所以要复制一份到 $this 里
-        $config = self::$config;        
+        $config = self::$_config;        
         $this->config = $config;
-        $this->sitePrefix = self::$sitePrefix;
+        $this->sitePrefix = self::$_sitePrefix;
         $this->dsn = "{$config['db']['dbms']}:host={$config['db']['dbhost']};dbname={$config['db']['dbName']};port={$config['db']['dbport']};charset=utf8";        
     }    
     
@@ -100,8 +103,8 @@ class Wawa
         if (!file_exists($config_file)) die("$config_file file not found");
         require_once($config_file);
         
-        self::$config = $config;   
-        self::$sitePrefix = self::$config['site_prefix'];
+        self::$_config = $config;   
+        self::$_sitePrefix = self::$_config['site_prefix'];
     }
     
     public static function runRoute() {
@@ -117,8 +120,8 @@ class Wawa
         
         
         // 去掉 sitePrefix 前缀：'/me/xxx' => 'xxx'
-        $pos = strpos($request_uri, self::$sitePrefix);
-        if ($pos === 0) $request_uri = substr($request_uri, strlen(self::$sitePrefix));  
+        $pos = strpos($request_uri, self::$_sitePrefix);
+        if ($pos === 0) $request_uri = substr($request_uri, strlen(self::$_sitePrefix));  
 
         // 取出 controllerName 和 actionName
         $arr = explode('/', $request_uri);
