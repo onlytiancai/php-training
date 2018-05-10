@@ -31,7 +31,7 @@
         <p>
             <?php for ($i = 1; $i <= $data['maxPage']; $i++) :?>
                 <a href="<?= $this->sitePrefix?>product?page=<?= $i ?>">第 <?= $i ?> 页</a>
-            <?php endfor?>            
+            <?php endfor?>
         </p>
         
         <h2>购物车</h2>

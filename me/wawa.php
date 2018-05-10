@@ -22,7 +22,7 @@ class Wawa
         $this->config = $config;
         $this->sitePrefix = self::$_sitePrefix;
         $this->dsn = "{$config['db']['dbms']}:host={$config['db']['dbhost']};dbname={$config['db']['dbName']};port={$config['db']['dbport']};charset=utf8";        
-    }    
+    }
     
     public function execute($sql, $args=[]) {
         $conn = $this->_conn();
