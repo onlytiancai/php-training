@@ -1,8 +1,8 @@
 <?php
 ini_set('date.timezone','Asia/Shanghai');
 header("Content-type:text/html;charset=utf-8");
-error_reporting(E_ALL & ~E_STRICT & ~E_NOTICE);
 error_reporting(E_ALL);
+session_start();
 
 const APP_ROOT = __DIR__;
 
@@ -31,7 +31,7 @@ class Wawa
     }
     
     public function fetch($sql, $args=[]) {      
-        $conn = $this->_conn();
+        $conn = $this->_conn();        
         $st = $this->_execute($conn, $sql, $args);        
         $ret = $st->fetchAll();
         $conn = null;
@@ -75,7 +75,7 @@ class Wawa
         die();
     }
             
-    private function _execute($conn, $sql, $args) {
+    private function _execute($conn, $sql, $args) {        
         $st = $conn->prepare($sql);
         $st->execute($args);
         return $st;
@@ -83,7 +83,9 @@ class Wawa
     
     private function _conn() {
         try {
-            return new PDO($this->dsn, $this->config['db']['dbuser'], $this->config['db']['dbpass']);          
+            $conn = new PDO($this->dsn, $this->config['db']['dbuser'], $this->config['db']['dbpass']);   
+            $conn->setAttribute( PDO::ATTR_EMULATE_PREPARES, false );
+            return $conn;
         } catch (PDOException $e) {
             die ("Error!: " . $e->getMessage() . "<br/>");
         } 

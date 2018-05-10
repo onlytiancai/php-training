@@ -1,17 +1,9 @@
 <?php
 require_once(APP_ROOT . '/models/CategoryModel.php');
+require_once(APP_ROOT . '/helpers/myhelper.php');
 
 $category = new CategoryModel();
 $w = new Wawa();
-
-function indent($level) {
-    $ret = '';
-    for ($i = 0; $i < $level; $i++) {        
-        $ret .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-    }
-    return $ret;
-}
-
 
 $w->get('index', function($w) use($category) {
     $w->render(
@@ -23,7 +15,7 @@ $w->get('index', function($w) use($category) {
 $w->get('new', function($w) use($category) {
     $w->render(
         'views/category_add.php',
-        ['rows' => $category->getAll()]        
+        ['rows' => $category->getAll()]
     );   
 });
 
