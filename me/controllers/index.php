@@ -6,9 +6,24 @@ $user = new UserModel();
 $w = new Wawa();
 
 $w->get('index', function($w) use($user) {
+    // 1、初始化默认页大小和页码
+    $pageSize = 10;
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 0;
+    
+    // 2、获取数据记录数，计算最大页码数
+    $total = $user->getCount();
+    $maxPage = ceil($total / $pageSize);
+    
+    // 3、校验输入，修正页码数，
+    if ($page < 1) $page = 1;
+    if ($page > $maxPage) $page = $maxPage;
+    
+    // 4、计算数据偏移量
+    $offset = ($page - 1) * $pageSize; 
+    
     $w->render(
         'views/index.php', 
-        ['rows' => $user->getAll()]
+        ['rows' => $user->getAll($pageSize, $offset), 'page' => $page, 'maxPage' => $maxPage]
     );   
 });
 

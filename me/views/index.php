@@ -28,4 +28,10 @@
     <?php endforeach;?>
 </table>
 
+<p>
+    <?php for ($i = 1; $i <= $data['maxPage']; $i++) :?>
+        <a href="<?= $this->sitePrefix?>index?page=<?= $i ?>">第 <?= $i ?> 页</a>
+    <?php endfor?>
+</p>
+
 <?php include('inc_footer.php') ?>
