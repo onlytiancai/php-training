@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="static/css/markdown.css">
-    </head>
-    <body class="markdown-body">
+<?php include('../views/inc_header.php') ?>
 
-<h1>PHP 快速上手</h1>
+<style>
+.result {
+    padding: 10px;
+}
+</style>
+
+<h1>PHP 快速上手：基本语法</h1>
     
 <h2>输出信息</h2>
         
@@ -27,6 +27,7 @@ var_dump(2018);
 printf('hello %s ！', 2018);
 </pre>
 
+<div class="bg-info result">
 <?php
 // 打印字符串
 echo 'Hello PHP !'; 
@@ -47,6 +48,7 @@ echo "<br>";
 // 格式化输出
 printf('hello %s ！', 2018);
 ?>
+</div>
  
 <h2>数学运算</h2>
 
@@ -54,7 +56,9 @@ printf('hello %s ！', 2018);
 echo 2 + 3;
 echo 2 + 3 * 5;
 echo (2 + 3) * 5;
-</pre>       
+</pre>    
+
+<div class="bg-info result">   
 <?php 
 echo 2 + 3;
 echo "<br>";
@@ -62,7 +66,7 @@ echo 2 + 3 * 5;
 echo "<br>";
 echo (2 + 3) * 5;
 echo "<br>";
-?>
+?></div>
 
 <h2>关系运算</h2>
 <pre>
@@ -71,6 +75,7 @@ var_dump(3 * 5 < 8);
 var_dump(3 * 5 == 15);
 var_dump(3 * 5 != 15);
 </pre>
+<div class="bg-info result">
 <?php
 var_dump(3 * 5 > 8);
 echo '<br>';
@@ -84,10 +89,10 @@ echo '<br>';
 var_dump(3 * 5 != 15);
 echo '<br>';
 
-?>
+?></div>
 <h2>逻辑运算</h2>
 
-<?php
+<div class="bg-info result"><?php
 var_dump(1 + 2 > 3 && 2 + 3 == 5);
 echo '<br>';
 
@@ -99,7 +104,7 @@ echo '<br>';
 
 var_dump(!(3 + 2 == 5));
 echo '<br>';
-?>
+?></div>
 
 <h2>变量和赋值</h2>
 
@@ -116,7 +121,7 @@ $c++;
 echo $c;
 </pre>
 
-<?php
+<div class="bg-info result"><?php
 $a = 10;
 $b = 5;
 $c = $a + $b;
@@ -130,7 +135,7 @@ echo "<br>";
 $c++;
 echo $c;
 echo "<br>";
-?>
+?></div>
         
 <h2>字符串模版</h2>        
 
@@ -140,11 +145,11 @@ $b = 'World';
 echo "$a $b .";
 </pre>
 
-<?php
+<div class="bg-info result"><?php
 $a = 'Hello';
 $b = 'World';
 echo "$a $b .";
-?>
+?></div>
 
 <h2>条件语句和关系操作符：两个数谁最大</h2>
 
@@ -161,7 +166,7 @@ if ($a < $b) {
 }
 </pre>
 
-<?php
+<div class="bg-info result"><?php
 $a = 8;
 $b = 3;
 
@@ -172,7 +177,7 @@ if ($a > $b) {
 if ($a < $b) {
     echo 'b 最大';
 }
-?>
+?></div>
 
 <h2>多重条件语句和逻辑操作符：三个数谁最大</h2>
 <pre>
@@ -188,7 +193,7 @@ if ($a > $b && $a > $c) {
     echo 'c 最大';
 }
 </pre>
-<?php
+<div class="bg-info result"><?php
 $a = 5;
 $b = 3;
 $c = 9;
@@ -200,7 +205,7 @@ if ($a > $b && $a > $c) {
 } else {
     echo 'c 最大';
 }
-?>
+?></div>
 
 <h2>循环语句：打印 5 次 Hello</h2>
 <pre>
@@ -210,24 +215,35 @@ while ($n > 0) {
     $n--;
 }
 </pre>
-<?php
+<div class="bg-info result"><?php
 $n = 5;
 while ($n > 0) {
     echo 'Hello' . '<br>';
     $n--;
 }
-?>
+?></div>
 
 <h2>for 循环：打印 10 以内的偶数</h2>
 
-<?php
+<pre>
+for ($i = 0; $i < 10; $i++) {
+    if ($i % 2 == 0) {
+        echo $i;
+    }
+}
+</pre>
+
+<div class="bg-info result"><?php
 for ($i = 0; $i < 10; $i++) {
     if ($i % 2 == 0) {
         echo $i . '<br>';
     }
 }
-?>
+?></div>
 
+
+
+<h2>数组基本操作</h2>
 <pre>
 // 打印数组
 $arr = [2, 0, 1, 8];
@@ -271,8 +287,7 @@ print_r($arr);
 echo join(',', $arr);
 </pre>
 
-<h2>数组基本操作</h2>
-<?php
+<div class="bg-info result"><?php
 // 打印数组
 $arr = [2, 0, 1, 8];
 print_r($arr);
@@ -322,7 +337,7 @@ echo '<br>';
 
 // 连接成字符串
 echo join(',', $arr);
-?>
+?></div>
 
 <h2>练习</h2>
 <ul>
@@ -380,7 +395,7 @@ echo substr('aaa111bbb', 2, 5);
 echo strpos('aaa111bbb', 'aaa') === 0 ? 'true' : 'false';
 echo strpos('aaa111bbb', 'bbb') === strlen('aaa111bbb') - strlen('bbb') ? 'true' : 'false';
 </pre>
-<?php
+<div class="bg-info result"><?php
 // 字符串长度
 echo strlen('abcde');
 echo '<br>';
@@ -447,7 +462,7 @@ echo '<br>';
 echo strpos('aaa111bbb', 'aaa') === 0 ? 'true' : 'false';
 echo '<br>';
 echo strpos('aaa111bbb', 'bbb') === strlen('aaa111bbb') - strlen('bbb') ? 'true' : 'false';
-?>
+?></div>
 
 <h2>练习</h2>
 <ul>
@@ -458,7 +473,28 @@ echo strpos('aaa111bbb', 'bbb') === strlen('aaa111bbb') - strlen('bbb') ? 'true'
 
 <h2>字典：关联数组</h2>
 
-<?php
+<pre>
+$d = ['a' => 1, 'b' => 2];
+//根据键获取值
+echo $d['a'];
+
+//添加键值对
+$d['c'] = 3;
+print_r($d);
+
+//删除指定键
+unset($d['b']);
+print_r($d);
+
+//某键是否存在
+var_dump(isset($d['a']), isset($d['b']));
+
+//遍历字典
+foreach ($d as $k => $v) {
+    echo "$k => $v";    
+}
+</pre>
+<div class="bg-info result"><?php
 $d = ['a' => 1, 'b' => 2];
 //根据键获取值
 echo $d['a'];
@@ -485,7 +521,7 @@ foreach ($d as $k => $v) {
     echo '<br>';
 }
 
-?>
+?></div>
 
 <h2>时间操作：</h2>
 <pre>
@@ -498,7 +534,7 @@ echo time();
 // 获取当前时间格式化字符串
 echo date("Y-m-d H:i:s");
 </pre>
-<?php
+<div class="bg-info result"><?php
 // 设置时区
 date_default_timezone_set("PRC");
 
@@ -509,7 +545,7 @@ echo '<br>';
 // 获取当前时间格式化字符串
 echo date("Y-m-d H:i:s");
 echo '<br>'
-?>
+?></div>
 
 <h2>文件操作: 打开并逐行读取文件</h2>
 <pre>
@@ -522,7 +558,7 @@ if(file_exists($filename)){
     fclose($file);
 }
 </pre>
-<?php
+<div class="bg-info result"><?php
 $filename = 'inc.php';
 if(file_exists($filename)){
     $file = fopen($filename, "r") or exit("Unable to open file!");
@@ -531,7 +567,7 @@ if(file_exists($filename)){
     }
     fclose($file);
 }
-?>
+?></div>
 
 
 <h2>类型判断</h2>
@@ -567,7 +603,7 @@ var_dump(empty('a'));
 var_dump(empty('0'));
 var_dump(empty('1'));
 </pre>
-<?php
+<div class="bg-info result"><?php
 // 是否为数字
 var_dump(is_numeric('3'));
 echo '<br>';
@@ -609,7 +645,7 @@ var_dump(empty('0'));
 var_dump(empty('1'));
 var_dump(empty([]));
 var_dump(empty([1]));
-?>
+?></div>
 
 <h2>类型转换</h2>
 <pre>
@@ -619,7 +655,7 @@ var_dump(strval(333));
 // 字符串转数字
 var_dump(intval('3333'));
 </pre>
-<?php
+<div class="bg-info result"><?php
 // 数字转字符串
 var_dump(strval(333));
 echo '<br>';
@@ -627,7 +663,7 @@ echo '<br>';
 // 字符串转数字
 var_dump(intval('3333'));
 echo '<br>';
-?>
+?></div>
 
 <h2>函数定义和调用</h2>
 <pre>
@@ -637,14 +673,14 @@ function add($a, $b) {
 
 echo add(2, 3);
 </pre>
-<?php
+<div class="bg-info result"><?php
 function add($a, $b) {
     return intval($a) + intval($b);
 }
 
 echo add(2, 3);
 echo '<br>';
-?>
+?></div>
 
 <h2>匿名方法和闭包</h2>
 <pre>
@@ -655,7 +691,7 @@ $filterArr = array_filter($arr, function ($item) use($max) {
 });
 print_r($filterArr);
 </pre>
-<?php
+<div class="bg-info result"><?php
 
 $arr = [1, 8, 3, 5, 7, 2, 4, 0, 9, 4];
 $max = 5;
@@ -664,7 +700,7 @@ $filterArr = array_filter($arr, function ($item) use($max) {
 });
 print_r($filterArr);
 
-?>
+?></div>
 
 <h2>返回函数的函数</h2>
 <pre>
@@ -676,7 +712,7 @@ function addFactory($a){
 $add2 = addFactory(2);
 echo $add2(3);
 </pre>
-<?php
+<div class="bg-info result"><?php
 function addFactory($a){
     return function($b) use($a) {
         return $a + $b;
@@ -684,7 +720,7 @@ function addFactory($a){
 }
 $add2 = addFactory(2);
 echo $add2(3);
-?>
+?></div>
 
 <h2>参数为函数的函数</h2>
 <pre>
@@ -699,7 +735,7 @@ function mult($a, $b) {
 echo testFunc('add');
 echo testFunc('mult');
 </pre>
-<?php
+<div class="bg-info result"><?php
 function testFunc($func) {
     return $func(3, 3);
 }
@@ -712,7 +748,7 @@ echo testFunc('add');
 echo '<br>';
 echo testFunc('mult');
 echo '<br>';
-?>
+?></div>
 
 <h2>函数的递归</h2>
 <pre>
@@ -722,13 +758,13 @@ function fib($n) {
 }
 echo fib(12);
 </pre>
-<?php
+<div class="bg-info result"><?php
 function fib($n) {
     if ($n == 1 || $n == 2) return 1;
     return fib($n - 2) + fib($n - 1);
 }
 echo fib(12);
-?>
+?></div>
 
 <h2>类: 方法，字段，静态字段</h2>
 <pre>
@@ -755,7 +791,7 @@ $user->show();
 $user = new User('alice', 17);
 $user->show();
 </pre>
-<?php
+<div class="bg-info result"><?php
 class User {
     private static $showcount = 0;
     private $age;
@@ -780,7 +816,7 @@ echo '<br>';
 $user = new User('alice', 17);
 $user->show();
 
-?>
+?></div>
 
 <h2>子类父类</h2>
 <pre>
@@ -796,7 +832,7 @@ class Girl extends User {
 $girl = new Girl('Alic', 19);
 $girl->show();
 </pre>
-<?php
+<div class="bg-info result"><?php
 class Girl extends User {
     public function __construct($username, $age) {
         parent::__construct($username, $age);
@@ -808,6 +844,6 @@ class Girl extends User {
 }
 $girl = new Girl('Alic', 19);
 $girl->show();
-?>
-    </body>
-</html>
+?></div>
+
+<?php include('../views/inc_footer.php') ?>

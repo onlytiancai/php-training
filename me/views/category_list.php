@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include('inc_header.php') ?>
 <?php
 // 打印某一行
 function renderRow($w, $row, $level) {
@@ -32,22 +32,19 @@ function renderRows($w, $rows, $pid=0, $level=0) {
     }
 }
 ?>
-<html>
-    <head>
-    </head>
-    <body>
-        <h1><?= $this->config['site_name'] ?></h1>
-        <p>
-        <a href="<?= $this->sitePrefix?>category/new">新增分类</a>
-        </p>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>类别</th>
-                <th>父类别</th>
-                <th>操作</th>
-            </tr>
-            <?php renderRows($this, $data['rows'])?>
-        </table>
-    </body>
-</html>
+
+<p>
+    <a class="btn btn-primary" href="<?= $this->sitePrefix?>category/new"  role="button">新增分类</a>            
+</p>
+        
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>类别</th>
+        <th>父类别</th>
+        <th>操作</th>
+    </tr>
+    <?php renderRows($this, $data['rows'])?>
+</table>
+
+<?php include('inc_footer.php') ?>
