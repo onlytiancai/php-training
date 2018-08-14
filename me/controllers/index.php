@@ -15,8 +15,8 @@ $w->get('index', function($w) use($user) {
     $maxPage = ceil($total / $pageSize);
     
     // 3、校验输入，修正页码数，
-    if ($page < 1) $page = 1;
     if ($page > $maxPage) $page = $maxPage;
+    if ($page < 1) $page = 1;
     
     // 4、计算数据偏移量
     $offset = ($page - 1) * $pageSize; 
